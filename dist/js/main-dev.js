@@ -56,3 +56,49 @@ if (D.querySelector(".ui-field-range__input")) {
     rangeValue.innerHTML = this.value;
   };
 }
+
+
+//carousel
+
+const fbItems = D.querySelectorAll('.feedback-item'),
+ fbWrap = D.querySelector('.feedback-wrapper'),
+ fbDir = D.querySelectorAll('.feedback-arrows__item');
+
+
+ let fbWidth =  fbWrap.offsetWidth;
+ window.addEventListener('resize', () => {
+  console.log('asd')
+  fbWidth =  fbWrap.offsetWidth;
+})
+ let fbPosition = 0;
+
+fbDir.forEach((arrow) => {
+  arrow.addEventListener('click', (elem) => {
+    const fbDataSet =  elem.target.dataset.direction;
+    const blockedArrow = D.querySelectorAll('.feedback-arrows__item_blocked')
+    blockedArrow.forEach((e) => {
+      e.classList.remove('feedback-arrows__item_blocked')
+    })
+    if(fbDataSet == 'prev') {
+      if(fbPosition +  fbWidth <= fbWidth) {
+        arrow.classList.add('feedback-arrows__item_blocked')
+        return
+      } else {
+        arrow.classList.remove('feedback-arrows__item_blocked')
+        fbPosition =  fbPosition - fbWidth
+        fbWrap.style.right = fbPosition + 'px';
+      }
+      
+    }
+    if(fbDataSet == 'next') {
+      if(fbPosition >= fbWidth * 6) {
+        arrow.classList.add('feedback-arrows__item_blocked')
+        return
+      } else {
+        arrow.classList.remove('feedback-arrows__item_blocked')
+        fbPosition =  fbPosition + fbWidth
+        fbWrap.style.right = fbPosition + 'px';
+      }
+    }
+  })
+})
