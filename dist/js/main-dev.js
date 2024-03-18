@@ -91,7 +91,7 @@ fbDir.forEach((arrow) => {
       
     }
     if(fbDataSet == 'next') {
-      if(fbPosition >= fbWidth * 6) {
+      if(fbPosition >= fbWidth * 2) {
         arrow.classList.add('feedback-arrows__item_blocked')
         return
       } else {
